@@ -31,7 +31,10 @@ function MailListener(options) {
     host: options.host,
     port: options.port,
     tls: options.tls,
-    tlsOptions: options.tlsOptions || {}
+    tlsOptions: options.tlsOptions || {},
+    connTimeout: options.connTimeout || 10000,
+    authTimeout: options.authTimeout || 5000,
+    keepalive: options.keepalive || true
   });
 
   this.imap.once('ready', imapReady.bind(this));
