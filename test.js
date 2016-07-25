@@ -11,7 +11,10 @@ var mailListener = new MailListener({
   markSeen: true,
   fetchUnreadOnStart: true,
   attachments: true,
-  attachmentOptions: { directory: "attachments/" }
+  attachmentOptions: { directory: "attachments/" },
+  connTimeout: 10000,
+  authTimeout: 5000,
+  keepalive: true
 });
 
 mailListener.start();

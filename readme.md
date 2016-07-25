@@ -33,7 +33,10 @@ var mailListener = new MailListener({
   fetchUnreadOnStart: true, // use it only if you want to get all unread email on lib start. Default is `false`,
   mailParserOptions: {streamAttachments: true}, // options to be passed to mailParser lib.
   attachments: true, // download attachments as they are encountered to the project directory
-  attachmentOptions: { directory: "attachments/" } // specify a download directory for attachments
+  attachmentOptions: { directory: "attachments/" }, // specify a download directory for attachments
+  connTimeout: 10000, // Number of milliseconds to wait for a connection to be established. Default: 10000
+  authTimeout: 5000, // Number of milliseconds to wait to be authenticated after a connection has been established. Default: 5000
+  keepalive: true // Configures the keepalive mechanism. Set to true to enable keepalive with defaults or set to object to enable and configure keepalive behavior: Default: true
 });
 
 mailListener.start(); // start listening
@@ -71,9 +74,9 @@ mailListener.imap.move(:msguids, :mailboxes, function(){})
 That's easy!
 
 ## Attachments
-Attachments can be streamed or buffered. This feature is based on how [mailparser](https://github.com/andris9/mailparser#attachments) handles attachments. 
+Attachments can be streamed or buffered. This feature is based on how [mailparser](https://github.com/andris9/mailparser#attachments) handles attachments.
 Setting `attachments: true` will download attachments as buffer objects by default to the project directory.
-A specific download directory may be specified by setting `attachmentOptions: { directory: "attachments/"}`. 
+A specific download directory may be specified by setting `attachmentOptions: { directory: "attachments/"}`.
 Attachments may also be streamed using `attachmentOptions: { stream: "true"}`. The `"attachment"` event will be fired every time an attachment is encountered.
 Refer to the [mailparser docs](https://github.com/andris9/mailparser#attachment-streaming) for specifics on how to stream attachments.
 
